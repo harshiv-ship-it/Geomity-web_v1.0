@@ -1,4 +1,9 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&display=swap');
+
+/* =====================================
+   GLOBAL
+===================================== */
 
 * {
     margin: 0;
@@ -6,9 +11,11 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
+    min-height: 0;
     overflow: hidden;
     background: #020203;
     color: #fff;
@@ -16,22 +23,33 @@ html, body {
     user-select: none;
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
-    touch-action: none;
+    overscroll-behavior: none;
 }
 
-/* GAME CANVAS */
+@supports (height: 100dvh) {
+    html,
+    body {
+        height: 100dvh;
+    }
+}
+
+/* =====================================
+   GAME CANVAS
+===================================== */
 
 canvas {
     position: fixed;
     inset: 0;
     z-index: 0;
     display: block;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     touch-action: none;
 }
 
-/* GAME HUD */
+/* =====================================
+   GAME HUD
+===================================== */
 
 #hud {
     position: fixed;
@@ -65,7 +83,8 @@ canvas {
     font-size: 11px;
 }
 
-#map-name, #fragments {
+#map-name,
+#fragments {
     color: #eee;
 }
 
@@ -99,7 +118,9 @@ canvas {
     letter-spacing: 1.5px;
 }
 
-/* SCREEN OVERLAYS */
+/* =====================================
+   SCREEN OVERLAYS
+===================================== */
 
 .screen {
     position: fixed;
@@ -108,10 +129,14 @@ canvas {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 28px;
-    overflow-y: auto;
+    padding: 16px;
+    overflow: hidden;
     background:
-        radial-gradient(ellipse at center, rgba(80, 0, 0, 0.20), transparent 65%),
+        radial-gradient(
+            ellipse at center,
+            rgba(80, 0, 0, 0.20),
+            transparent 65%
+        ),
         rgba(0, 0, 0, 0.94);
 }
 
@@ -119,11 +144,14 @@ canvas {
     display: none !important;
 }
 
-/* DEVICE SELECTION */
+/* =====================================
+   DEVICE SELECTION
+===================================== */
 
 .overlay-panel {
     width: min(550px, 100%);
-    padding: 48px 35px;
+    max-height: 100%;
+    padding: 40px 30px;
     text-align: center;
     border: 1px solid rgba(180, 45, 52, 0.5);
     background: linear-gradient(145deg, #151012, #050505);
@@ -140,7 +168,7 @@ canvas {
 .overlay-panel h1,
 .map-panel h1 {
     color: #fff;
-    font-size: clamp(35px, 6vw, 58px);
+    font-size: clamp(28px, 6vw, 58px);
     font-weight: 900;
     letter-spacing: 9px;
     text-shadow: 0 0 25px rgba(180, 0, 0, 0.55);
@@ -151,7 +179,7 @@ canvas {
     font-size: 12px;
     letter-spacing: 6px;
     margin-top: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .device-heading {
@@ -169,7 +197,7 @@ canvas {
 }
 
 .device-button {
-    min-height: 145px;
+    min-height: 125px;
     padding: 18px 10px;
     display: flex;
     flex-direction: column;
@@ -209,10 +237,12 @@ canvas {
     color: #777;
     font-size: 10px;
     letter-spacing: 4px;
-    margin-top: 27px;
+    margin-top: 22px;
 }
 
-/* ORIENTATION SCREEN */
+/* =====================================
+   ORIENTATION SCREEN
+===================================== */
 
 #orientation-screen {
     z-index: 30;
@@ -238,13 +268,14 @@ canvas {
     line-height: 1.8;
 }
 
-/* MAP SELECTION */
+/* =====================================
+   MAP SELECTION
+===================================== */
 
 .map-panel {
     width: min(850px, 100%);
-    max-height: 100%;
-    overflow-y: auto;
-    padding: 30px 35px;
+    max-height: calc(100% - 12px);
+    padding: 22px 30px;
     text-align: center;
     border: 1px solid rgba(170, 45, 52, 0.45);
     background: linear-gradient(145deg, #101012, #070708);
@@ -257,34 +288,36 @@ canvas {
     color: #f1dada;
     font-size: 18px;
     letter-spacing: 4px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .map-description {
     color: #aaa;
     font-family: Georgia, serif;
     font-size: 14px;
-    line-height: 1.7;
-    margin: 0 auto 27px;
+    line-height: 1.6;
+    margin: 0 auto 18px;
 }
 
-/* MAP CARDS */
+/* =====================================
+   MAP CARDS
+===================================== */
 
 .map-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 15px;
+    gap: 12px;
     width: 100%;
 }
 
 .map-card {
-    min-height: 120px;
-    padding: 17px 20px;
+    min-height: 105px;
+    padding: 13px 17px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 8px;
+    gap: 6px;
     text-align: left;
     border: 1px solid #383033;
     background: linear-gradient(135deg, #191416, #0b0a0b);
@@ -341,7 +374,9 @@ canvas {
     color: #999;
 }
 
-/* INTRODUCTION / PAUSE / RESULT */
+/* =====================================
+   INTRODUCTION / PAUSE / RESULT
+===================================== */
 
 #result-text {
     color: #c9baba;
@@ -384,7 +419,9 @@ canvas {
     background: #302126;
 }
 
-/* ANDROID TOUCH CONTROLS */
+/* =====================================
+   ANDROID TOUCH CONTROLS
+===================================== */
 
 #touch-controls {
     position: fixed;
@@ -459,7 +496,37 @@ canvas {
     pointer-events: none;
 }
 
-/* SCROLLBARS */
+/* =====================================
+   MAP EXIT BUTTON
+===================================== */
+
+.map-exit-button {
+    display: block;
+    width: min(280px, 100%);
+    min-height: 44px;
+    margin: 14px auto 0;
+    padding: 10px 20px;
+    background: #171315;
+    color: #e8dfe0;
+    border: 1px solid #655055;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.map-exit-button:hover {
+    background: #302126;
+    border-color: #a33a45;
+    box-shadow: 0 0 18px rgba(190, 30, 40, 0.3);
+}
+
+/* =====================================
+   SCROLLBAR APPEARANCE
+===================================== */
 
 .map-panel::-webkit-scrollbar,
 .screen::-webkit-scrollbar {
@@ -471,23 +538,21 @@ canvas {
     background: #743039;
 }
 
-/* RESPONSIVE */
+/* =====================================
+   SMALL SCREENS
+===================================== */
 
 @media (max-width: 650px) {
     .screen {
-        padding: 12px;
+        padding: 8px;
     }
 
     .map-panel {
-        padding: 25px 16px;
-    }
-
-    .map-list {
-        grid-template-columns: 1fr;
+        padding: 16px 12px;
     }
 
     .map-card {
-        min-height: 110px;
+        min-height: 85px;
     }
 
     .hud-top {
@@ -504,42 +569,137 @@ canvas {
     }
 
     .overlay-panel {
-        padding: 30px 18px;
+        padding: 25px 16px;
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 420px) and (orientation: portrait) {
     .device-options {
         grid-template-columns: 1fr;
     }
 
     .device-button {
-        min-height: 105px;
+        min-height: 95px;
     }
 }
 
-@media (max-height: 650px) {
-    .map-panel {
-        padding-top: 18px;
-        padding-bottom: 18px;
+/* =====================================
+   SHORT LANDSCAPE SCREENS
+   ANDROID MAP SELECTION FIT
+===================================== */
+
+@media (orientation: landscape) and (max-height: 500px) {
+
+    .screen {
+        padding: 5px;
     }
 
-    .subtitle {
-        margin-bottom: 18px;
+    /* Keep all map content inside the viewport */
+    .map-panel {
+        width: min(850px, 100%);
+        max-height: calc(100dvh - 10px);
+        padding: 7px 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .map-panel h1 {
+        font-size: clamp(19px, 5vh, 30px);
+        letter-spacing: 5px;
+        line-height: 1.15;
+    }
+
+    .map-panel h2 {
+        font-size: 13px;
+        letter-spacing: 3px;
+        margin-bottom: 4px;
     }
 
     .map-description {
-        margin-bottom: 15px;
+        font-size: 11px;
+        line-height: 1.25;
+        margin-bottom: 7px;
+    }
+
+    /* Five cards: two columns, three rows */
+    .map-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px 8px;
     }
 
     .map-card {
-        min-height: 100px;
+        min-height: 0;
+        height: clamp(48px, 14vh, 65px);
+        padding: 5px 10px;
+        gap: 2px;
     }
-}
 
-/* LANDSCAPE MOBILE LAYOUT */
+    .map-number {
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
 
-@media (orientation: landscape) and (max-height: 500px) {
+    .map-title {
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 1px;
+    }
+
+    .map-difficulty {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .map-status {
+        font-size: 7px;
+        margin-top: 0;
+    }
+
+    .map-exit-button {
+        min-height: 30px;
+        margin-top: 6px;
+        padding: 4px 12px;
+        font-size: 10px;
+        letter-spacing: 1.5px;
+    }
+
+    /* Compact device selection too */
+    .overlay-panel {
+        padding: 12px 20px;
+    }
+
+    .overlay-panel h1 {
+        font-size: clamp(22px, 6vh, 36px);
+        letter-spacing: 5px;
+    }
+
+    .subtitle {
+        margin-bottom: 8px;
+    }
+
+    .device-heading {
+        margin: 8px 0;
+        font-size: 12px;
+    }
+
+    .device-button {
+        min-height: 75px;
+        padding: 7px;
+        gap: 4px;
+    }
+
+    .device-icon {
+        font-size: 25px;
+    }
+
+    .overlay-footer {
+        margin-top: 8px;
+        font-size: 8px;
+    }
+
+    /* Touch control positioning */
     .touch-movement {
         left: 14px;
         bottom: 10px;
@@ -558,11 +718,12 @@ canvas {
     .touch-actions {
         right: 14px;
         bottom: 12px;
+        gap: 6px;
     }
 
     .action-button {
         min-width: 65px;
-        min-height: 40px;
+        min-height: 38px;
     }
 
     #touch-look-hint {
@@ -570,88 +731,41 @@ canvas {
     }
 }
 
-/* MAP SELECTION EXIT BUTTON */
-
-.map-exit-button {
-    display: block;
-    width: min(280px, 100%);
-    min-height: 48px;
-    margin: 20px auto 0;
-    padding: 12px 20px;
-
-    background: #171315;
-    color: #e8dfe0;
-    border: 1px solid #655055;
-    border-radius: 4px;
-
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2px;
-
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.map-exit-button:hover {
-    background: #302126;
-    border-color: #a33a45;
-    box-shadow: 0 0 18px rgba(190, 30, 40, 0.3);
-}
-
-
 /* =====================================
-   ANDROID FULLSCREEN / NO PAGE SCROLL
+   VERY SHORT LANDSCAPE SCREENS
 ===================================== */
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    overscroll-behavior: none;
-    touch-action: none;
-}
+@media (orientation: landscape) and (max-height: 350px) {
 
-#game-container {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-@supports (height: 100dvh) {
-    html,
-    body,
-    #game-container {
-        height: 100dvh;
+    .map-panel {
+        padding: 4px 10px;
     }
-}
 
-/* Keep map selection within the screen */
-.map-panel {
-    max-height: 100%;
-    overflow: hidden;
-}
+    .map-panel h1 {
+        font-size: 19px;
+    }
 
-/* Preserve original full-screen touch-control layout */
-#touch-controls {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
+    .map-panel h2 {
+        font-size: 11px;
+    }
 
-.touch-button {
-    touch-action: none;
-}
+    .map-description {
+        font-size: 9px;
+        margin-bottom: 4px;
+    }
 
-/* Landscape Android */
-@media screen and (orientation: landscape) {
-    #game-container {
-        width: 100vw;
-        height: 100dvh;
+    .map-card {
+        height: 44px;
+        padding: 3px 8px;
+    }
+
+    .map-title {
+        font-size: 9px;
+    }
+
+    .map-exit-button {
+        min-height: 25px;
+        margin-top: 4px;
+        font-size: 9px;
     }
 }

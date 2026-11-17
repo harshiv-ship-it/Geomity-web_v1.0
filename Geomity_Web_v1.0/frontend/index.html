@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEOMITY v1.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="fog fog-one"></div>
+    <div class="fog fog-two"></div>
+    <div id="particles"></div>
+    <div class="vignette"></div>
+
+    <main id="game-container">
+
+        <!-- MAIN MENU -->
+        <section id="main-menu" class="screen active">
+            <div class="top-label">CROW DEVELOPERS PRESENTS</div>
+
+            <div class="title-area">
+                <div class="title-symbol">◈</div>
+                <h1>GEOMITY</h1>
+                <div class="subtitle">A HORROR SHAPE</div>
+                <div class="version">VERSION 1.0</div>
+            </div>
+
+            <nav class="menu-buttons">
+                <button id="play-button" class="main-button">PLAY</button>
+                <button id="settings-button">SETTINGS</button>
+                <button id="credits-button">CREDITS</button>
+                <button id="exit-button">EXIT</button>
+            </nav>
+
+            <div class="bottom-label">
+                <span>THE DARKNESS IS WAITING</span>
+                <span>© 2026 CROW DEVELOPERS</span>
+            </div>
+        </section>
+
+        <!-- GAME SCREEN -->
+        <section id="game-screen" class="screen">
+            <div class="game-message">
+                <div class="game-symbol">◈</div>
+                <h2>THE NIGHT BEGINS</h2>
+                <p>Your journey into the darkness starts here.</p>
+                <button class="back-button" data-screen="main-menu">
+                    BACK TO MENU
+                </button>
+            </div>
+        </section>
+
+        <!-- CREDITS -->
+        <section id="credits-screen" class="screen">
+            <div class="panel">
+                <div class="small-heading">BEHIND THE DARKNESS</div>
+                <h2>CREDITS</h2>
+
+                <div class="credit-line"></div>
+
+                <div class="credit-item">
+                    <span>CREATED BY</span>
+                    <strong>HARSHIV TRIVEDI</strong>
+                </div>
+
+                <div class="credit-item">
+                    <span>DEVELOPMENT STUDIO</span>
+                    <strong>CROW DEVELOPERS</strong>
+                </div>
+
+                <div class="credit-item">
+                    <span>GAME</span>
+                    <strong>GEOMITY</strong>
+                </div>
+
+                <div class="credit-item">
+                    <span>VERSION</span>
+                    <strong>1.0</strong>
+                </div>
+
+                <div class="credit-item">
+                    <span>SPECIAL THANKS</span>
+                    <strong>OUR PLAYERS</strong>
+                </div>
+
+                <div class="credit-line"></div>
+
+                <p class="credits-footer">
+                    EVERY SHAPE HAS A SECRET.
+                    <br>
+                    EVERY SECRET HAS A STORY.
+                </p>
+
+                <button class="back-button" data-screen="main-menu">
+                    BACK
+                </button>
+            </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="settings-screen" class="screen">
+            <div class="panel">
+                <div class="small-heading">CUSTOMIZE YOUR EXPERIENCE</div>
+                <h2>SETTINGS</h2>
+
+                <div class="setting-item">
+                    <label for="brightness">BRIGHTNESS</label>
+                    <input id="brightness" type="range"
+                           min="50" max="120" value="100">
+                </div>
+
+                <div class="setting-item">
+                    <label for="effects">ATMOSPHERIC EFFECTS</label>
+                    <input id="effects" type="checkbox" checked>
+                </div>
+
+                <button class="back-button" data-screen="main-menu">
+                    BACK
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

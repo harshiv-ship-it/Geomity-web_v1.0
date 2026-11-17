@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#020203">
+    <title>GEOMITY — A Horror Shape</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+    <canvas id="game"></canvas>
+
+    <!-- DEVICE SELECTION -->
+    <div id="device-screen" class="screen">
+        <div class="overlay-panel">
+            <div class="eyebrow">CROW DEVELOPERS PRESENTS</div>
+            <h1>GEOMITY</h1>
+            <p class="subtitle">A HORROR SHAPE</p>
+            <h2 class="device-heading">WHICH DEVICE ARE YOU PLAYING ON?</h2>
+
+            <div class="device-options">
+                <button id="android-button" class="device-button">
+                    <span class="device-icon">▯</span>
+                    <span>ANDROID</span>
+                    <small>TOUCHSCREEN CONTROLS</small>
+                </button>
+
+                <button id="windows-button" class="device-button">
+                    <span class="device-icon">▦</span>
+                    <span>WINDOWS</span>
+                    <small>KEYBOARD + MOUSE</small>
+                </button>
+            </div>
+
+            <div class="overlay-footer">CROW DEVELOPERS</div>
+        </div>
+    </div>
+
+    <!-- ANDROID LANDSCAPE INSTRUCTION -->
+    <div id="orientation-screen" class="screen hidden">
+        <div class="overlay-panel">
+            <div class="eyebrow">ANDROID MODE</div>
+            <div class="rotate-symbol">↻</div>
+            <h2>ROTATE YOUR DEVICE</h2>
+            <p id="orientation-message">
+                Please turn your phone sideways to landscape mode to play GEOMITY.
+            </p>
+        </div>
+    </div>
+
+    <!-- GAME HUD -->
+    <div id="hud">
+        <div class="hud-top">
+            <div class="brand">GEOMITY <span>V1.0</span></div>
+            <div id="map-name">MAP 1: THE FORGOTTEN MAZE</div>
+            <div id="fragments">FRAGMENTS: 0 / 3</div>
+        </div>
+
+        <div id="message">FIND THE THREE ENERGY FRAGMENTS</div>
+        <div id="crosshair">+</div>
+
+        <div id="hint">
+            WASD: MOVE | MOUSE: LOOK | F: FLASHLIGHT | ESC: PAUSE
+        </div>
+    </div>
+
+    <!-- ANDROID TOUCH CONTROLS -->
+    <div id="touch-controls" class="hidden">
+        <div class="touch-movement">
+            <button class="touch-button" data-key="w" aria-label="Move forward">▲</button>
+            <div class="touch-middle">
+                <button class="touch-button" data-key="a" aria-label="Move left">◀</button>
+                <button class="touch-button" data-key="s" aria-label="Move backward">▼</button>
+                <button class="touch-button" data-key="d" aria-label="Move right">▶</button>
+            </div>
+        </div>
+
+        <div class="touch-actions">
+            <button id="touch-flashlight" class="touch-button action-button">LIGHT</button>
+            <button id="touch-pause" class="touch-button action-button">PAUSE</button>
+        </div>
+
+        <div id="touch-look-hint">DRAG THE SCREEN TO LOOK</div>
+    </div>
+
+    <!-- MAP SELECTION -->
+    <div id="map-screen" class="screen hidden">
+        <div class="map-panel">
+            <div class="eyebrow">CROW DEVELOPERS PRESENTS</div>
+            <h1>GEOMITY</h1>
+            <p class="subtitle">A HORROR SHAPE</p>
+            <h2>SELECT YOUR MAP</h2>
+            <p class="map-description">
+                Complete each map to unlock the next challenge.
+            </p>
+
+            <div class="map-list">
+                <button class="map-card unlocked" id="map-1-button" data-map="1">
+                    <span class="map-number">MAP 01</span>
+                    <span class="map-title">THE FORGOTTEN MAZE</span>
+                    <span class="map-difficulty">EASY</span>
+                    <span class="map-status">UNLOCKED</span>
+                </button>
+
+                <button class="map-card locked" id="map-2-button" data-map="2" disabled>
+                    <span class="map-number">MAP 02</span>
+                    <span class="map-title">THE SILENT ROOMS</span>
+                    <span class="map-difficulty">MEDIUM</span>
+                    <span class="map-status">LOCKED</span>
+                </button>
+
+                <button class="map-card locked" id="map-3-button" data-map="3" disabled>
+                    <span class="map-number">MAP 03</span>
+                    <span class="map-title">THE HOLLOW DEPTHS</span>
+                    <span class="map-difficulty">HARD</span>
+                    <span class="map-status">LOCKED</span>
+                </button>
+
+                <button class="map-card locked" id="map-4-button" data-map="4" disabled>
+                    <span class="map-number">MAP 04</span>
+                    <span class="map-title">THE DARKEST HOUR</span>
+                    <span class="map-difficulty">EXTREME</span>
+                    <span class="map-status">LOCKED</span>
+                </button>
+
+                <button class="map-card locked" id="map-5-button" data-map="5" disabled>
+                    <span class="map-number">MAP 05</span>
+                    <span class="map-title">THE IMPOSSIBLE</span>
+                    <span class="map-difficulty">IMPOSSIBLE</span>
+                    <span class="map-status">LOCKED</span>
+                </button>
+            </div>
+
+            <button id="map-exit-button" class="map-exit-button">
+                EXIT TO MAIN MENU
+            </button>
+
+            <div class="overlay-footer">CROW DEVELOPERS</div>
+        </div>
+    </div>
+
+    <!-- INTRODUCTION / PAUSE / RESULT -->
+    <div id="overlay" class="screen hidden">
+        <div class="overlay-panel">
+            <div class="eyebrow">A HORROR SHAPE</div>
+            <h1 id="result-title">GEOMITY</h1>
+            <p id="result-text">THE MAZE IS WAITING.</p>
+            <button id="start-button">ENTER THE MAZE</button>
+            <button id="exit-level-button" class="hidden">EXIT LEVEL</button>
+            <div class="overlay-footer">CROW DEVELOPERS</div>
+        </div>
+    </div>
+
+    <script src="../audio/music.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

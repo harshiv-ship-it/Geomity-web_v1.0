@@ -1,0 +1,600 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #020203;
+    color: #fff;
+    font-family: 'Cinzel', Georgia, serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+}
+
+/* GAME CANVAS */
+
+canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    touch-action: none;
+}
+
+/* GAME HUD */
+
+#hud {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hud-top {
+    position: absolute;
+    top: 22px;
+    left: 28px;
+    right: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px #000;
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+}
+
+.brand span {
+    color: #c52c35;
+    font-size: 11px;
+}
+
+#map-name, #fragments {
+    color: #eee;
+}
+
+#message {
+    position: absolute;
+    top: 85px;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #e7c6c6;
+}
+
+#crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 23px;
+    color: white;
+    text-shadow: 0 0 8px red;
+}
+
+#hint {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: #bbb;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+/* SCREEN OVERLAYS */
+
+.screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 28px;
+    overflow-y: auto;
+    background:
+        radial-gradient(ellipse at center, rgba(80, 0, 0, 0.20), transparent 65%),
+        rgba(0, 0, 0, 0.94);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* DEVICE SELECTION */
+
+.overlay-panel {
+    width: min(550px, 100%);
+    padding: 48px 35px;
+    text-align: center;
+    border: 1px solid rgba(180, 45, 52, 0.5);
+    background: linear-gradient(145deg, #151012, #050505);
+    box-shadow: 0 0 70px rgba(120, 0, 0, 0.2);
+}
+
+.eyebrow {
+    color: #d44b52;
+    font-size: 11px;
+    letter-spacing: 5px;
+    margin-bottom: 12px;
+}
+
+.overlay-panel h1,
+.map-panel h1 {
+    color: #fff;
+    font-size: clamp(35px, 6vw, 58px);
+    font-weight: 900;
+    letter-spacing: 9px;
+    text-shadow: 0 0 25px rgba(180, 0, 0, 0.55);
+}
+
+.subtitle {
+    color: #b7a2a2;
+    font-size: 12px;
+    letter-spacing: 6px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.device-heading {
+    color: #f1dada;
+    font-size: 15px;
+    letter-spacing: 2px;
+    line-height: 1.7;
+    margin: 22px 0;
+}
+
+.device-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.device-button {
+    min-height: 145px;
+    padding: 18px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #8c3038;
+    background: linear-gradient(135deg, #251014, #0b0a0b);
+    color: #fff;
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.device-button:hover,
+.device-button:focus-visible {
+    border-color: #ff555e;
+    background: linear-gradient(135deg, #45151c, #130c0e);
+    box-shadow: 0 0 25px rgba(170, 0, 0, 0.25);
+}
+
+.device-button small {
+    color: #c8aaaa;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.device-icon {
+    font-family: Arial, sans-serif;
+    font-size: 35px;
+    color: #e05b62;
+}
+
+.overlay-footer {
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-top: 27px;
+}
+
+/* ORIENTATION SCREEN */
+
+#orientation-screen {
+    z-index: 30;
+}
+
+.rotate-symbol {
+    font-family: Arial, sans-serif;
+    font-size: 65px;
+    color: #e05b62;
+    margin: 12px 0;
+}
+
+#orientation-screen h2 {
+    font-size: 19px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+#orientation-message {
+    color: #c9baba;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* MAP SELECTION */
+
+.map-panel {
+    width: min(850px, 100%);
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 30px 35px;
+    text-align: center;
+    border: 1px solid rgba(170, 45, 52, 0.45);
+    background: linear-gradient(145deg, #101012, #070708);
+    box-shadow:
+        0 0 60px rgba(120, 0, 0, 0.15),
+        inset 0 0 35px rgba(255, 255, 255, 0.015);
+}
+
+.map-panel h2 {
+    color: #f1dada;
+    font-size: 18px;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.map-description {
+    color: #aaa;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0 auto 27px;
+}
+
+/* MAP CARDS */
+
+.map-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    width: 100%;
+}
+
+.map-card {
+    min-height: 120px;
+    padding: 17px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    text-align: left;
+    border: 1px solid #383033;
+    background: linear-gradient(135deg, #191416, #0b0a0b);
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.25s ease;
+}
+
+.map-card.unlocked {
+    border-color: #8c3038;
+}
+
+.map-card.unlocked:hover {
+    border-color: #ff555e;
+    background: linear-gradient(135deg, #351317, #130c0e);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(170, 0, 0, 0.2);
+}
+
+.map-card.locked {
+    opacity: 0.48;
+    cursor: not-allowed;
+}
+
+.map-number {
+    color: #d45a60;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.map-title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+}
+
+.map-difficulty {
+    color: #d4baba;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.map-status {
+    color: #e05b62;
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-top: 2px;
+}
+
+.map-card.locked .map-status {
+    color: #999;
+}
+
+/* INTRODUCTION / PAUSE / RESULT */
+
+#result-text {
+    color: #c9baba;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 20px 0 30px;
+}
+
+#start-button,
+#exit-level-button {
+    display: block;
+    width: min(280px, 100%);
+    min-height: 48px;
+    margin: 13px auto;
+    padding: 12px 20px;
+    border: 1px solid #a93640;
+    background: #4a1017;
+    color: white;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+#start-button:hover,
+#exit-level-button:hover {
+    background: #8c202b;
+    box-shadow: 0 0 22px rgba(190, 30, 40, 0.35);
+}
+
+#exit-level-button {
+    background: #171315;
+    border-color: #655055;
+}
+
+#exit-level-button:hover {
+    background: #302126;
+}
+
+/* ANDROID TOUCH CONTROLS */
+
+#touch-controls {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.touch-movement {
+    position: absolute;
+    left: 20px;
+    bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    pointer-events: auto;
+}
+
+.touch-middle {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.touch-button {
+    min-width: 54px;
+    min-height: 54px;
+    padding: 8px;
+    border: 1px solid rgba(220, 75, 85, 0.8);
+    border-radius: 10px;
+    background: rgba(30, 8, 13, 0.82);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 21px;
+    font-weight: bold;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.touch-button:active {
+    background: rgba(130, 25, 40, 0.95);
+    border-color: #ff6974;
+}
+
+.touch-actions {
+    position: absolute;
+    right: 20px;
+    bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: auto;
+}
+
+.action-button {
+    min-width: 76px;
+    min-height: 48px;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+#touch-look-hint {
+    position: absolute;
+    right: 115px;
+    bottom: 18px;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 9px;
+    letter-spacing: 1px;
+    pointer-events: none;
+}
+
+/* SCROLLBARS */
+
+.map-panel::-webkit-scrollbar,
+.screen::-webkit-scrollbar {
+    width: 6px;
+}
+
+.map-panel::-webkit-scrollbar-thumb,
+.screen::-webkit-scrollbar-thumb {
+    background: #743039;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+    .screen {
+        padding: 12px;
+    }
+
+    .map-panel {
+        padding: 25px 16px;
+    }
+
+    .map-list {
+        grid-template-columns: 1fr;
+    }
+
+    .map-card {
+        min-height: 110px;
+    }
+
+    .hud-top {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        flex-wrap: wrap;
+        font-size: 9px;
+    }
+
+    #hint {
+        font-size: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    .overlay-panel {
+        padding: 30px 18px;
+    }
+}
+
+@media (max-width: 420px) {
+    .device-options {
+        grid-template-columns: 1fr;
+    }
+
+    .device-button {
+        min-height: 105px;
+    }
+}
+
+@media (max-height: 650px) {
+    .map-panel {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+    .subtitle {
+        margin-bottom: 18px;
+    }
+
+    .map-description {
+        margin-bottom: 15px;
+    }
+
+    .map-card {
+        min-height: 100px;
+    }
+}
+
+/* LANDSCAPE MOBILE LAYOUT */
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .touch-movement {
+        left: 14px;
+        bottom: 10px;
+        gap: 4px;
+    }
+
+    .touch-middle {
+        gap: 4px;
+    }
+
+    .touch-button {
+        min-width: 45px;
+        min-height: 43px;
+    }
+
+    .touch-actions {
+        right: 14px;
+        bottom: 12px;
+    }
+
+    .action-button {
+        min-width: 65px;
+        min-height: 40px;
+    }
+
+    #touch-look-hint {
+        display: none;
+    }
+}
+
+/* MAP SELECTION EXIT BUTTON */
+
+.map-exit-button {
+    display: block;
+    width: min(280px, 100%);
+    min-height: 48px;
+    margin: 20px auto 0;
+    padding: 12px 20px;
+
+    background: #171315;
+    color: #e8dfe0;
+    border: 1px solid #655055;
+    border-radius: 4px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.map-exit-button:hover {
+    background: #302126;
+    border-color: #a33a45;
+    box-shadow: 0 0 18px rgba(190, 30, 40, 0.3);
+}

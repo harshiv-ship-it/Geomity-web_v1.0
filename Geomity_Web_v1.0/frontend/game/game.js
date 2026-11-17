@@ -445,27 +445,87 @@ function showMapSelection() {
     updateMapSelection();
 }
 
+
+/* ==========================================
+   MAP CAROUSEL SYSTEM
+========================================== */
+
+const mapPrevButton = document.getElementById("map-prev-button");
+const mapNextButton = document.getElementById("map-next-button");
+const mapPlayButton = document.getElementById("map-play-button");
+
+const mapPreviewNumber = document.getElementById("map-preview-number");
+const mapPreviewSymbol = document.getElementById("map-preview-symbol");
+const mapPreviewTitle = document.getElementById("map-preview-title");
+const mapPreviewDifficulty = document.getElementById("map-preview-difficulty");
+const mapPreviewStatus = document.getElementById("map-preview-status");
+
 function updateMapSelection() {
-    MAPS.forEach(map => {
-        const button = document.getElementById(
-            `map-${map.id}-button`
-        );
+    const map = MAPS[selectedMap - 1];
 
-        if (!button) return;
+    if (!map) return;
 
-        const unlocked = map.id <= unlockedMap;
+    const unlocked = map.id <= unlockedMap;
 
-        button.disabled = !unlocked;
-        button.classList.toggle("unlocked", unlocked);
-        button.classList.toggle("locked", !unlocked);
+    mapPreviewNumber.textContent =
+        `MAP ${map.id} OF ${MAPS.length}`;
 
-        const status = button.querySelector(".map-status");
+    mapPreviewSymbol.textContent =
+        String(map.id).padStart(2, "0");
 
-        if (status) {
-            status.textContent = unlocked ? "UNLOCKED" : "LOCKED";
-        }
+    mapPreviewTitle.textContent = map.name;
+
+    mapPreviewDifficulty.textContent =
+        map.difficulty.toUpperCase();
+
+    mapPreviewStatus.textContent =
+        unlocked ? "UNLOCKED" : "LOCKED";
+
+    mapPreviewStatus.classList.toggle("unlocked", unlocked);
+    mapPreviewStatus.classList.toggle("locked", !unlocked);
+
+    mapPlayButton.disabled = !unlocked;
+    mapPlayButton.textContent =
+        unlocked ? "PLAY MAP" : "MAP LOCKED";
+
+    mapPrevButton.disabled = selectedMap === 1;
+    mapNextButton.disabled = selectedMap === MAPS.length;
+}
+
+function changeSelectedMap(direction) {
+    const nextMap = selectedMap + direction;
+
+    if (nextMap < 1 || nextMap > MAPS.length) return;
+
+    selectedMap = nextMap;
+    updateMapSelection();
+}
+
+if (mapPrevButton) {
+    mapPrevButton.addEventListener("click", () => {
+        changeSelectedMap(-1);
     });
 }
+
+if (mapNextButton) {
+    mapNextButton.addEventListener("click", () => {
+        changeSelectedMap(1);
+    });
+}
+
+if (mapPlayButton) {
+    mapPlayButton.addEventListener("click", () => {
+        const map = MAPS[selectedMap - 1];
+
+        if (!map || map.id > unlockedMap) return;
+
+        currentMap = map;
+        maze = map.maze;
+
+        startNewGame();
+    });
+}
+
 
 function selectMap(mapId) {
     if (mapId < 1 || mapId > MAPS.length) return;

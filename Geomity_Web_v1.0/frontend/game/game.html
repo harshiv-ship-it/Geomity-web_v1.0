@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,6 +70,7 @@
     <div id="touch-controls" class="hidden">
         <div class="touch-movement">
             <button class="touch-button" data-key="w" aria-label="Move forward">▲</button>
+
             <div class="touch-middle">
                 <button class="touch-button" data-key="a" aria-label="Move left">◀</button>
                 <button class="touch-button" data-key="s" aria-label="Move backward">▼</button>
@@ -77,82 +79,128 @@
         </div>
 
         <div class="touch-actions">
-            <button id="touch-flashlight" class="touch-button action-button">LIGHT</button>
-            <button id="touch-pause" class="touch-button action-button">PAUSE</button>
+            <button id="touch-flashlight" class="touch-button action-button">
+                LIGHT
+            </button>
+
+            <button id="touch-pause" class="touch-button action-button">
+                PAUSE
+            </button>
         </div>
 
         <div id="touch-look-hint">DRAG THE SCREEN TO LOOK</div>
     </div>
 
-    <!-- MAP SELECTION -->
+    <!-- MAP SELECTION: ONE MAP AT A TIME -->
     <div id="map-screen" class="screen hidden">
         <div class="map-panel">
+
             <div class="eyebrow">CROW DEVELOPERS PRESENTS</div>
+
             <h1>GEOMITY</h1>
             <p class="subtitle">A HORROR SHAPE</p>
+
             <h2>SELECT YOUR MAP</h2>
+
             <p class="map-description">
                 Complete each map to unlock the next challenge.
             </p>
 
-            <div class="map-list">
-                <button class="map-card unlocked" id="map-1-button" data-map="1">
-                    <span class="map-number">MAP 01</span>
-                    <span class="map-title">THE FORGOTTEN MAZE</span>
-                    <span class="map-difficulty">EASY</span>
-                    <span class="map-status">UNLOCKED</span>
+            <div class="map-carousel">
+
+                <button
+                    type="button"
+                    id="map-prev-button"
+                    class="map-nav-button"
+                    aria-label="Previous map">
+                    &#10094;
                 </button>
 
-                <button class="map-card locked" id="map-2-button" data-map="2" disabled>
-                    <span class="map-number">MAP 02</span>
-                    <span class="map-title">THE SILENT ROOMS</span>
-                    <span class="map-difficulty">MEDIUM</span>
-                    <span class="map-status">LOCKED</span>
+                <div class="map-preview" aria-live="polite">
+
+                    <div
+                        class="map-preview-number"
+                        id="map-preview-number">
+                        MAP 1 OF 5
+                    </div>
+
+                    <div
+                        class="map-preview-symbol"
+                        id="map-preview-symbol">
+                        01
+                    </div>
+
+                    <h3 id="map-preview-title">
+                        THE FORGOTTEN MAZE
+                    </h3>
+
+                    <p
+                        class="map-preview-difficulty"
+                        id="map-preview-difficulty">
+                        EASY
+                    </p>
+
+                    <p
+                        class="map-preview-status unlocked"
+                        id="map-preview-status">
+                        UNLOCKED
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="map-next-button"
+                    class="map-nav-button"
+                    aria-label="Next map">
+                    &#10095;
                 </button>
 
-                <button class="map-card locked" id="map-3-button" data-map="3" disabled>
-                    <span class="map-number">MAP 03</span>
-                    <span class="map-title">THE HOLLOW DEPTHS</span>
-                    <span class="map-difficulty">HARD</span>
-                    <span class="map-status">LOCKED</span>
-                </button>
-
-                <button class="map-card locked" id="map-4-button" data-map="4" disabled>
-                    <span class="map-number">MAP 04</span>
-                    <span class="map-title">THE DARKEST HOUR</span>
-                    <span class="map-difficulty">EXTREME</span>
-                    <span class="map-status">LOCKED</span>
-                </button>
-
-                <button class="map-card locked" id="map-5-button" data-map="5" disabled>
-                    <span class="map-number">MAP 05</span>
-                    <span class="map-title">THE IMPOSSIBLE</span>
-                    <span class="map-difficulty">IMPOSSIBLE</span>
-                    <span class="map-status">LOCKED</span>
-                </button>
             </div>
 
-            <button id="map-exit-button" class="map-exit-button">
+            <button
+                type="button"
+                id="map-play-button"
+                class="map-play-button">
+                PLAY MAP
+            </button>
+
+            <button
+                id="map-exit-button"
+                class="map-exit-button">
                 EXIT TO MAIN MENU
             </button>
 
             <div class="overlay-footer">CROW DEVELOPERS</div>
+
         </div>
     </div>
 
     <!-- INTRODUCTION / PAUSE / RESULT -->
     <div id="overlay" class="screen hidden">
         <div class="overlay-panel">
+
             <div class="eyebrow">A HORROR SHAPE</div>
+
             <h1 id="result-title">GEOMITY</h1>
+
             <p id="result-text">THE MAZE IS WAITING.</p>
-            <button id="start-button">ENTER THE MAZE</button>
-            <button id="exit-level-button" class="hidden">EXIT LEVEL</button>
+
+            <button id="start-button">
+                ENTER THE MAZE
+            </button>
+
+            <button id="exit-level-button" class="hidden">
+                EXIT LEVEL
+            </button>
+
             <div class="overlay-footer">CROW DEVELOPERS</div>
+
         </div>
     </div>
 
     <script src="../audio/music.js"></script>
     <script src="game.js"></script>
+
 </body>
 </html>
